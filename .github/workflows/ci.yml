@@ -26,4 +26,4 @@ jobs:
 
       - name: Build Example Project
         working-directory: example
-        run: ./gradlew build
+        run: ../gradlew build
