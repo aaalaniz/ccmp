@@ -35,9 +35,9 @@ jobs:
 
       - name: Bump Version to SNAPSHOT
         run: |
-          CURRENT_VERSION=$(grep -oE 'version = "[0-9]+\.[0-9]+\.[0-9]+(-SNAPSHOT)?"' plugin/build.gradle.kts | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+          CURRENT_VERSION=$(cat version.txt | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
           if [ -z "$CURRENT_VERSION" ]; then
-            echo "Could not find current version in build.gradle.kts"
+            echo "Could not find current version in version.txt"
             exit 1
           fi
           
@@ -45,11 +45,10 @@ jobs:
           PATCH_VERSION=$((VERSION_PARTS[2] + 1))
           NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${PATCH_VERSION}-SNAPSHOT"
           
-          sed -i.bak "s/version = \"$CURRENT_VERSION\"/version = \"$NEW_VERSION\"/" plugin/build.gradle.kts
-          rm plugin/build.gradle.kts.bak
+          echo "$NEW_VERSION" > version.txt
           
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add plugin/build.gradle.kts
+          git add version.txt
           git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
           git push origin HEAD:main
