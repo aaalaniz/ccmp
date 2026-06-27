@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "xyz.alaniz.aaron.ccmp"
-version = rootProject.file("version.txt").readText().trim()
+version = file("../version.txt").readText().trim()
 
 repositories {
     gradlePluginPortal()
