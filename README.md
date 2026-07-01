@@ -13,6 +13,11 @@ ccmp {
     compose = true
     circuit = true
     parcelize = true
+
+    // Configures Compose Multiplatform resources
+    resources {
+        // Compose ResourcesExtension configuration
+    }
 }
 
 android {
@@ -22,11 +27,15 @@ android {
 
 ## Features
 - Provides a centralized `ccmp` DSL to toggle features for each module.
-- Automatically sets up Kotlin Multiplatform and Android library targets.
+- Automatically sets up Kotlin Multiplatform and Android library targets:
+  - Android (`androidTarget()`) with `compileSdk = 36` and `minSdk = 24`.
+  - iOS (`iosX64()`, `iosArm64()`, `iosSimulatorArm64()`).
+  - Desktop / JVM (`jvm()`).
 - Pre-configures known-compatible versions of core dependencies:
   - Kotlin 2.2.20
   - KSP 2.2.20-2.0.4
   - Compose Multiplatform 1.11.0
   - Circuit 0.33.1
   - Metro 1.1.1
-- Configures Android and iOS targets out of the box.
+- Configures Java 17 for both source/target compatibility and Kotlin `jvmTarget`.
+- Using the `resources {}` block automatically enables Compose if it is not already enabled.
