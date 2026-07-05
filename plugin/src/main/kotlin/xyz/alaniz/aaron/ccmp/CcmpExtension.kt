@@ -22,6 +22,21 @@ open class CcmpExtension @Inject constructor(private val project: Project) {
             if (value) {
                 // Circuit typically requires KSP which is applied in the base plugin
                 project.dependencies.add("commonMainImplementation", "com.slack.circuit:circuit-foundation:0.33.1")
+                project.dependencies.add("commonMainApi", "com.slack.circuit:circuit-codegen-annotations:0.33.1")
+
+                val kspExtension = project.extensions.findByType(com.google.devtools.ksp.gradle.KspExtension::class.java)
+                kspExtension?.arg("circuit.codegen.mode", "metro")
+
+                val kspConfigurations = listOf(
+                    "kspCommonMainMetadata",
+                    "kspAndroid",
+                    "kspIosArm64",
+                    "kspIosSimulatorArm64",
+                    "kspIosX64"
+                )
+                kspConfigurations.forEach { configuration ->
+                    project.dependencies.add(configuration, "com.slack.circuit:circuit-codegen:0.33.1")
+                }
             }
         }
 
