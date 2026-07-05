@@ -6,13 +6,14 @@ An opinionated KMP app platform for building Kotlin Multiplatform applications w
 
 ```kotlin
 plugins {
-    id("xyz.alaniz.aaron.ccmp") version "0.1.0"
+    id("xyz.alaniz.aaron.ccmp") version "0.3.0"
 }
 
 ccmp {
     compose = true
     circuit = true
     parcelize = true
+    jvm = true
 
     // Configures Compose Multiplatform resources
     resources {
@@ -29,8 +30,8 @@ android {
 - Provides a centralized `ccmp` DSL to toggle features for each module.
 - Automatically sets up Kotlin Multiplatform and Android library targets:
   - Android (`androidTarget()`) with `compileSdk = 36` and `minSdk = 24`.
-  - iOS (`iosX64()`, `iosArm64()`, `iosSimulatorArm64()`).
-  - Desktop / JVM (`jvm()`).
+  - iOS (`iosArm64()`, `iosSimulatorArm64()`).
+  - Desktop / JVM (`jvm()`) which is opt-in via the `jvm = true` DSL flag.
 - Pre-configures known-compatible versions of core dependencies:
   - Kotlin 2.2.20
   - KSP 2.2.20-2.0.4
