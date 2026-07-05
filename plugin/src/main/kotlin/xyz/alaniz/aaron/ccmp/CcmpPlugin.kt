@@ -22,13 +22,9 @@ class CcmpPlugin : Plugin<Project> {
             kmpExtension.apply {
                 androidTarget()
                 
-                iosX64()
                 iosArm64()
                 iosSimulatorArm64()
 
-                // Desktop / JVM target if applicable
-                jvm()
-                
                 sourceSets.getByName("commonMain").dependencies {
                     // Metro dependency usually required if applying the plugin
                     implementation("dev.zacsweers.metro:runtime:1.1.1")
