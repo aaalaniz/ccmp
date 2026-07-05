@@ -48,6 +48,16 @@ open class CcmpExtension @Inject constructor(private val project: Project) {
             }
         }
 
+    var jvm: Boolean = false
+        set(value) {
+            field = value
+            if (value) {
+                val kmpExtension = project.extensions.getByType(org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension::class.java)
+                kmpExtension.jvm()
+            }
+        }
+
+
     fun resources(action: Action<ResourcesExtension>) {
         if (!compose) {
             compose = true
