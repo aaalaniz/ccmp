@@ -27,15 +27,8 @@ open class CcmpExtension @Inject constructor(private val project: Project) {
                 val kspExtension = project.extensions.findByType(com.google.devtools.ksp.gradle.KspExtension::class.java)
                 kspExtension?.arg("circuit.codegen.mode", "metro")
 
-                val kspConfigurations = listOf(
-                    "kspCommonMainMetadata",
-                    "kspAndroid",
-                    "kspIosArm64",
-                    "kspIosSimulatorArm64",
-                    "kspIosX64"
-                )
-                kspConfigurations.forEach { configuration ->
-                    project.dependencies.add(configuration, "com.slack.circuit:circuit-codegen:0.33.1")
+                project.configurations.matching { it.name.startsWith("ksp") && !it.name.contains("Test") }.configureEach {
+                    project.dependencies.add(it.name, "com.slack.circuit:circuit-codegen:0.33.1")
                 }
             }
         }
@@ -47,6 +40,16 @@ open class CcmpExtension @Inject constructor(private val project: Project) {
                 project.pluginManager.apply("org.jetbrains.kotlin.plugin.parcelize")
             }
         }
+
+    var jvm: Boolean = false
+        set(value) {
+            field = value
+            if (value) {
+                val kmpExtension = project.extensions.getByType(org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension::class.java)
+                kmpExtension.jvm()
+            }
+        }
+
 
     fun resources(action: Action<ResourcesExtension>) {
         if (!compose) {
