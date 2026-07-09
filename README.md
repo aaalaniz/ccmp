@@ -24,8 +24,8 @@ android {
 - Provides a centralized `ccmp` DSL to toggle features for each module.
 - Automatically sets up Kotlin Multiplatform and Android library targets.
 - Pre-configures known-compatible versions of core dependencies:
-  - Kotlin 2.2.20
-  - KSP 2.2.20-2.0.4
+  - Kotlin 2.3.21
+  - KSP 2.3.21-2.0.4
   - Compose Multiplatform 1.11.0
   - Circuit 0.33.1
   - Metro 1.1.1

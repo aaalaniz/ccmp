@@ -5,11 +5,28 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinBasePluginWrapper
 
 class CcmpPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             extensions.create("ccmp", CcmpExtension::class.java, this)
+
+            val expectedKotlinVersion = "2.3.21"
+            val expectedComposeVersion = "1.11.0"
+
+            plugins.withType(KotlinBasePluginWrapper::class.java) { plugin ->
+                if (plugin.pluginVersion != expectedKotlinVersion) {
+                    logger.warn("CCMP Warning: Expected Kotlin version $expectedKotlinVersion but found ${plugin.pluginVersion}.")
+                }
+            }
+
+            pluginManager.withPlugin("org.jetbrains.compose") {
+                val composeVersion = plugins.getPlugin("org.jetbrains.compose").javaClass.protectionDomain.codeSource.location.toString()
+                if (!composeVersion.contains(expectedComposeVersion)) {
+                    logger.warn("CCMP Warning: Applied Compose Multiplatform plugin version does not match expected version $expectedComposeVersion.")
+                }
+            }
 
             with(pluginManager) {
                 apply("org.jetbrains.kotlin.multiplatform")

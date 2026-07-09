@@ -17,7 +17,7 @@ dependencies {
     implementation(gradleApi())
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.21")
     implementation("com.android.tools.build:gradle:8.13.2")
-    implementation("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.2.20-2.0.4")
+    implementation("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.3.21-2.0.4")
     implementation("org.jetbrains.compose:compose-gradle-plugin:1.11.0")
     implementation("org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:2.3.21")
     implementation("dev.zacsweers.metro:gradle-plugin:1.1.1")
@@ -40,7 +40,7 @@ gradlePlugin {
 
 dependencies {
     implementation(gradleApi())
-    testImplementation("org.jetbrains.kotlin:kotlin-test:2.2.20")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:2.3.21")
     testImplementation(gradleTestKit())
 }
 
