@@ -8,8 +8,8 @@ version = file("../version.txt").readText().trim()
 
 catalog {
     versionCatalog {
-        version("kotlin", "2.3.21")
-        version("ksp", "2.3.21-2.0.4")
+        version("kotlin", "2.2.0")
+        version("ksp", "2.2.0-2.0.2")
         version("compose-multiplatform", "1.11.0")
         version("circuit", "0.33.1")
         version("metro", "1.1.1")

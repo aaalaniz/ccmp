@@ -20,7 +20,8 @@ class CcmpPluginTest {
     fun setup() {
         buildFile = File(testProjectDir, "build.gradle.kts")
         // Need to set up a minimal valid android environment to avoid errors
-        File(testProjectDir, "local.properties").writeText("sdk.dir=/Users/aaron/Library/Android/sdk\n")
+        val sdkDir = System.getenv("ANDROID_HOME") ?: "/Users/aaron/Library/Android/sdk"
+        File(testProjectDir, "local.properties").writeText("sdk.dir=$sdkDir\n")
         File(testProjectDir, "gradle.properties").writeText("android.useAndroidX=true\n")
         File(testProjectDir, "src/main/AndroidManifest.xml").apply {
             parentFile.mkdirs()

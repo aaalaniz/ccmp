@@ -12,7 +12,7 @@ class CcmpPlugin : Plugin<Project> {
         with(target) {
             extensions.create("ccmp", CcmpExtension::class.java, this)
 
-            val expectedKotlinVersion = "2.3.21"
+            val expectedKotlinVersion = "2.2.0"
             val expectedComposeVersion = "1.11.0"
 
             plugins.withType(KotlinBasePluginWrapper::class.java) { plugin ->
