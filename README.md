@@ -33,7 +33,7 @@ android {
   - iOS (`iosArm64()`, `iosSimulatorArm64()`).
   - Desktop / JVM (`jvm()`) which is opt-in via the `jvm = true` DSL flag.
 - Pre-configures known-compatible versions of core dependencies:
-  - Kotlin 2.2.20
+  - Kotlin 2.3.21
   - KSP 2.2.20-2.0.4
   - Compose Multiplatform 1.11.0
   - Circuit 0.33.1
